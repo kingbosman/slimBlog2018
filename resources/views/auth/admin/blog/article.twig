@@ -1,0 +1,77 @@
+{% extends 'templates/admin.twig' %}
+
+{% block content %}
+
+	<div class="container">
+
+        <div class="card">
+
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2>Manage article <small>To edit an article please fill out the form below. The article will be visible once the input date has been reached.</small></h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <form role="form" action="/admin/blog/article/delete/{{ article.article_id }}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm m-t-10 pull-right"><i class="zmdi zmdi-delete"></i> Delete article</button>
+                            {{ csrf.field | raw }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body card-padding">
+                <form role="form" method="post" action="/admin/blog/article/update/{{ article.article_id }}">
+                    <div class="form-group fg-line {{ errors.title ? 'has-error' : '' }}">
+                        <label for="title">Title</label>
+                        <input type="text" value="{{ article.article_title }}" name="title" class="form-control input-sm" placeholder="Super awesome article title">
+                        {% if errors.title %}
+                            <span class="help-block">{{ errors.title | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="categories">Categories</label>
+                        <select class="chosen" name="categories[]" data-placeholder="Choose categories">
+                            {% set field_category = article.category_name|split(',') %}
+                            {% for category in categories %}
+                                <option {% if category.category_name in field_category %}selected{% endif %} value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="fg-line form-group {{ errors.date ? 'has-error' : '' }}">
+                        <label for="date">Post Date</label>
+                        <input type="text" value="{{ article.date|date("d/m/Y") }}" name="date" class="form-control date-picker" placeholder="Click here...">
+                        {% if errors.date %}
+                            <span class="help-block">{{ errors.date | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group fg-line {{ errors.description ? 'has-error' : '' }}">
+                        <label for="description">Description</label>
+                        <textarea name="description" rows="4" cols="50" class="form-control input-sm" placeholder="Small description 255 characters">{{ article.article_description }}</textarea>
+                        {% if errors.description %}
+                            <span class="help-block">{{ errors.description | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group fg-line {{ errors.content ? 'has-error' : '' }}">
+                        <label for="content">Content</label>
+                        <textarea name="content" rows="4" cols="50" class="html-editor input-sm" placeholder="Content here">{{ article.article_content }}</textarea>
+                        {% if errors.content %}
+                            <span class="help-block">{{ errors.content | first }}</span>
+                        {% endif %}
+                    </div>
+                    <img src="{{ article.article_image }}" alt="">
+                    <div class="form-group">
+                        <label for="file">Image</label><br>
+                        <input value="{{ article.article_image }}" data-crop="" type="hidden" name="image" id="file" role="uploadcare-uploader" />
+                    </div>
+
+                    {{ csrf.field | raw }}
+
+                    
+                    <button type="submit" class="btn btn-primary btn-sm m-t-10">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

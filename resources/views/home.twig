@@ -1,0 +1,112 @@
+{% extends 'templates/default.twig' %}
+
+{% block content %}
+
+	<div id="contents"><!-- CONTENTS START -->
+	    <div class="wrapper" style="width:100%">
+
+	        <div class="mainSlider">
+	            <div class="mainSliderItemsWrapper">
+	                <div class="mainSliderItems" style="width:100%">
+
+	                	{% for slide in slides %}
+							<div class="mainSliderItemsEntry">
+		                        <img class="mainSliderItemsEntryImg" src="{{ slide.slide_image }}" alt="" />
+		                        <div class="mainSliderItemsEntryBox bgcolor2">
+		                            <div class="mainSliderItemsEntryBoxBorder"></div>
+		                            <div class="mainSliderItemsEntryBoxTitle textcolor2 font3">
+		                                {{ slide.slide_intro }}
+		                            </div>
+		                            <div class="mainSliderItemsEntryBoxContent textcolor3">
+		                                {{ slide.slide_content }}
+		                            </div>
+		                            <div class="mainSliderItemsEntryBoxButtons">
+		                                <div class="mainSliderItemsEntryBoxButtonsPrev bgcolor3 bgcolor_hover"></div>
+		                                <div class="mainSliderItemsEntryBoxButtonsNext bgcolor3 bgcolor_hover"></div>
+		                            </div>
+		                        </div>
+		                    </div>
+	                	{% endfor %}
+	                    
+	                </div>
+	            </div>
+	            <div class="mainSliderNav">
+	                <div class="mainSliderNavBar bgcolor"></div>
+	            </div>
+	        </div>
+
+	    </div>
+	    <div class="testimonialbg">
+	        <div class="wrapper">
+	            <div class="testimonial">
+	                <div class="testimonialImg bordercolor">
+	                    <img src="{{ testimonial.testimonial_image }}" alt="" />
+	                </div>
+	                <div class="testimonialContent font4">
+	                    <div class="testimonialContentText textcolor4">
+	                        {{ testimonial.testimonial_content }}
+	                    </div>
+	                    <div class="testimonialContentAuthor textcolor5">
+	                        &HorizontalLine; {{ testimonial.testimonial_author }}
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="wrapper">
+	        <div class="works">
+	            <div class="worksFilter">
+	                <div class="worksFilterText textcolor6">
+	                    Latest articles:
+	                </div>
+	                <ul class="worksFilterCategories">
+	                    <li class="textcolor6 worksFilterCategoriesActive bordercolor3" data-category="all">
+	                        <div class="bordercolor3">
+	                            all
+	                        </div>
+	                    </li>
+	                    {% for category in categories %}
+							<li class="textcolor6 bordercolor3" data-category="{{ category.category_name|lower }}">
+		                        <div class="bordercolor3">
+		                            {{ category.category_name }}
+		                        </div>
+		                    </li>
+	                    {% endfor %}
+	                    
+	                </ul>
+	            </div>
+	            <div class="worksContainer worksContainerView1">
+	                
+	                {% for article in articles %}
+	                	
+						{# categories in data .. #}
+		                <div class="worksEntry" 
+		                	data-categories="{{ article.category_name|lower }}">
+		                    <div class="worksEntryContainer">
+		                        <div class="worksEntryInfo">
+		                            <div class="worksEntryInfoTitle">
+	                                    {{ article.article_title }}
+		                            </div>
+		                            <div  class="worksEntryInfoExcerpt">
+		                                {{ article.article_description|slice(0,80) }}...
+		                            </div>
+		                            <div class="worksEntryInfoMore">
+		                                <a href="/blog/article/{{ article.article_id }}/{{ article.article_slug|lower }}">
+		                                    Read more
+		                                </a>
+		                            </div>
+		                        </div>
+		                        <img style="height:240px" class="worksEntryImg" src="{{ article.article_image }}" alt="" />
+		                    </div>
+		                </div>
+
+	                {% endfor %}
+
+	            </div>
+	        </div>
+	        
+	    </div>
+	</div><!-- CONTENTS END -->
+
+{% endblock %}

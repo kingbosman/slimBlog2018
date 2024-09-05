@@ -1,0 +1,63 @@
+{% extends 'templates/admin.twig' %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="card">
+	        <div class="card-header">
+	            <h2>Add Article <small>To add an article please fill out the form below. The article will be visible once the input date has been reached.</small></h2>
+	        </div>
+	        
+	        <div class="card-body card-padding">
+	            <form role="form" method="post" action="{{ path_for('admin.blog.add') }}">
+	                <div class="form-group fg-line {{ errors.title ? 'has-error' : '' }}">
+	                    <label for="title">Title</label>
+	                    <input type="text" name="title" class="form-control input-sm" placeholder="Super awesome article title" value="{{ old.title }}">
+	                    {% if errors.title %}
+	                        <span class="help-block">{{ errors.title | first }}</span>
+	                    {% endif %}
+	                </div>
+	                <div class="form-group">
+	                	<label for="categories">Categories</label>
+                        <select class="chosen" name="categories[]" data-placeholder="Choose categories">
+                            {% for category in categories %}
+								<option value="{{ category.category_name }}">{{ category.category_name }}</option>
+			                {% endfor %}
+                        </select>
+                    </div>
+	                <div class="fg-line form-group {{ errors.date ? 'has-error' : '' }}">
+	                	<label for="date">Post Date</label>
+                        <input type="text" name="date" class="form-control date-picker" placeholder="Click here..." value="{{ old.date }}">
+                        {% if errors.date %}
+	                        <span class="help-block">{{ errors.date | first }}</span>
+	                    {% endif %}
+                    </div>
+                    <div class="form-group fg-line {{ errors.description ? 'has-error' : '' }}">
+	                    <label for="description">Description</label>
+	                    <textarea name="description" rows="4" cols="50" class="form-control input-sm" placeholder="Small description 255 characters">{{ old.description }}</textarea>
+	                    {% if errors.description %}
+	                        <span class="help-block">{{ errors.description | first }}</span>
+	                    {% endif %}
+	                </div>
+	                <div class="form-group fg-line {{ errors.content ? 'has-error' : '' }}">
+	                    <label for="content">Content</label>
+	                    <textarea name="content" rows="4" cols="50" class="html-editor input-sm" placeholder="Content here">{{ old.content }}</textarea>
+	                    {% if errors.content %}
+	                        <span class="help-block">{{ errors.content | first }}</span>
+	                    {% endif %}
+	                </div>
+	                <div class="form-group">
+	                	<label for="file">Image</label><br>
+	                	<input data-crop="" type="hidden" name="image" id="file" role="uploadcare-uploader" />
+	                </div>
+
+	                {{ csrf.field | raw }}
+
+	                
+	                <button type="submit" class="btn btn-primary btn-sm m-t-10">Add Article</button>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+
+{% endblock %}

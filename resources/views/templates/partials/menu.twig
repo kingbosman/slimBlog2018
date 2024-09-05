@@ -1,0 +1,50 @@
+<aside id="sidebar" class="sidebar c-overflow">
+    <div class="profile-menu">
+        <a href="">
+            <div class="profile-pic">
+                <img src="{{ base_url() }}/assets/admin/img/profile-pics/1.jpg" alt="">
+            </div>
+
+            <div class="profile-info">
+                {{ auth.user.user_name }}
+
+                <i class="zmdi zmdi-caret-down"></i>
+            </div>
+        </a>
+
+        <ul class="main-menu">
+            <li>
+                <a href="{{ path_for('auth.password.change') }}"><i class="zmdi zmdi-account"></i> Profile</a>
+            </li>
+            <li>
+                <a href="{{ path_for('auth.signout') }}"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="main-menu">
+        <li>
+            <a href="{{ path_for('admin.home') }}"><i class="zmdi zmdi-home"></i> Dashboard</a>
+        </li>
+        <li class="sub-menu">
+            <a href=""><i class="zmdi zmdi-view-compact"></i> Content Manager</a>
+
+            <ul>
+                <li><a href="{{ path_for('admin.content.home') }}">Home</a></li>
+                {# <li><a href="#">Circuculum Vitae <small style="color:orange">(Not Available)</small></a></li> #}
+                <li><a href="{{ path_for('admin.content.other') }}">Other</a></li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <a href=""><i class="zmdi zmdi-widgets"></i> Blog</a>
+
+            <ul>
+                <li><a href="{{ path_for('admin.blog.add') }}">Add New Article</a></li>
+                <li><a href="{{ path_for('admin.blog.content') }}">Manage Articles</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ path_for('auth.signup') }}"><i class="zmdi zmdi-account-add"></i> Create New Admin</a>
+        </li>
+    </ul>
+</aside>

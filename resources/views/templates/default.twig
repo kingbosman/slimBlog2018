@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>EJ Bosman</title>
+
+    <!-- template css -->
+    <link href="{{ base_url() }}/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- bootstrap and fontawesome -->
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ base_url() }}/assets/images/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- font -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" />
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="{{ base_url() }}/assets/js/libs/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{{ base_url() }}/assets/js/libs/jquery-ui-1.10.3.min.js"></script>
+
+    <!-- template js -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}/assets/js/plugins.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}/assets/js/script.js"></script>
+
+    <!-- custom -->
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/assets/css/app.css" />
+
+    <script type="text/javascript">
+        jQuery(function($){
+                 $( '.menu-btn' ).click(function(){
+                 $('.responsive-menu').toggleClass('expand')
+                 })
+            })
+    </script>
+
+
+</head>
+<body class="font3">
+    <div class="wrapper">
+    	<div class="custombg"></div>
+    </div>
+    <div class="borderline1"></div>
+    <div class="borderline2"></div>
+
+    {% include 'templates/partials/navigation.twig' %}
+
+    <div class="container">
+        {% include 'templates/partials/flash.twig'  %}
+    </div>
+    {% block content %}{% endblock %}
+
+    <!-- BOOTSTRAP JS -->
+    <script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- template js -->
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <div class="footerbg"><!-- FOOTER START -->
+        <div class="row">
+            <div class="wrapper">
+                <div class="footer textcolor5">
+                    <p class="pull-right">© Evert-Jan Bosman {{"NOW"|date("Y")}}</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- FOOTER END -->
+</body>
+</html>

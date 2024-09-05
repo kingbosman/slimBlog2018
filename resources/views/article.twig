@@ -1,0 +1,111 @@
+{% extends 'templates/default.twig' %}
+
+{% block content %}
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.7";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div id="contents"><!-- CONTENTS START -->
+        <div class="wrapper">
+            <div class="sidebar">
+                <div class="widget font2">
+                    <div class="widgetTitle font1">
+                        categories
+                    </div>
+                    <div class="widgetBody">
+                        <div class="widgetCategories">
+                            <ul>
+                                <li>
+                                    <a href="/blog"><span></span>All</a>
+                                </li>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="/blog/{{ category.category_name|lower }}"><span></span>{{ category.category_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget font2">
+                    <div class="widgetTitle font1">
+                        recent works
+                    </div>
+                    <div class="widgetBody">
+                        {% for article in articles|slice(0,3) %}
+                            <div class="widgetWorks">
+                                <div class="widgetWorksEntry">
+                                    <div class="widgetWorksEntryImg">
+                                        <a href="/blog/article/{{ article.article_id }}/{{ article.article_slug|lower }}">
+                                            <span></span>
+                                            <img src="{{ article.article_image }}" alt="{{ article.article_title }}" />
+                                        </a>
+                                    </div>
+                                    <div class="widgetWorksEntryInfo">
+                                        {{ article.article_title }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="streched">
+                {# <div class="titleContainer font1 titlePage">
+                    <div class="title">
+                        Test {{article.article_title}}
+                    </div>
+                </div> #}
+                <div class="blog">
+                    <div class="blogEntry">
+                        <div class="blogEntryFeatured">
+                            <img style="max-height:400px" src="{{ article.article_image }}" alt="">
+                        </div>
+                        <div class="blogEntryTitle">
+                            <a href="#">
+                                {{ article.article_title }}
+                            </a>
+                        </div>
+                        {# <div class="blogEntryExcerpt">
+                            {{ article.article_description }}
+                        </div> #}
+                        <div class="blogEntryExcerpt">
+                            {{ article.article_content|raw }}
+                        </div>
+                        <div class="blogEntryFooter">
+                            <div class="blogEntryFooterDate">
+                                {{ article.article_date|date("d F Y") }}
+                            </div>
+                            <div class="blogEntryFooterDelimiter">
+                                /
+                            </div>
+                        </div>
+
+                        <div class="blogEntryFooter">
+                            <div class="fb-comments" data-href="http://www.ejbosman.nl/comments/articles/{{ args.id }}" data-numposts="5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {# <div class="streched">
+                <div class="blogNav">
+                    <a class="blogNavActive" href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <span>...</span>
+                    <a href="#">9</a>
+                    <a href="#">&rarr;</a>
+                </div>
+            </div> #}
+        </div>
+    </div><!-- CONTENTS END -->
+
+
+{% endblock %}

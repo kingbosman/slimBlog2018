@@ -1,0 +1,54 @@
+{% extends 'templates/admin.twig' %}
+
+{% block content %}
+
+	<div class="container">
+
+        <div class="card">
+
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2>Manage testimonial <small>To edit a testimonial please fill out the form below.</small></h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <form role="form" action="/admin/content/testimonial/delete/{{ testimonial.testimonial_id }}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm m-t-10 pull-right"><i class="zmdi zmdi-delete"></i> Delete testimonial</button>
+                            {{ csrf.field | raw }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body card-padding">
+                <form role="form" method="post" action="/admin/content/testimonial/update/{{ testimonial.testimonial_id }}">
+                    <div class="form-group fg-line {{ errors.author ? 'has-error' : '' }}">
+                        <label for="author">Intro</label>
+                        <input type="text" name="author" class="form-control input-sm" placeholder="John Doe" value="{{ testimonial.testimonial_author }}">
+                        {% if errors.author %}
+                            <span class="help-block">{{ errors.author | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group fg-line {{ errors.testimonial_content ? 'has-error' : '' }}">
+                        <label for="testimonial_content">Content</label>
+                        <input type="text" name="testimonial_content" class="form-control input-sm" placeholder="Small message max 255 characters" value="{{ testimonial.testimonial_content }}">
+                        {% if errors.testimonial_content %}
+                            <span class="help-block">{{ errors.testimonial_content | first }}</span>
+                        {% endif %}
+                    </div>
+                    <img src="{{ testimonial.testimonial_image }}" alt="">
+                    <div class="form-group">
+                        <label for="file">Image</label><br>
+                        <input data-crop="" value="{{ testimonial.testimonial_image }}" type="hidden" name="image" id="file" role="uploadcare-uploader" />
+                    </div>
+
+                    {{ csrf.field | raw }}
+
+                    
+                    <button type="submit" class="btn btn-primary btn-sm m-t-10">Edit testimonial</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

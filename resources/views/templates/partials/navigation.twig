@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="header"><!-- HEADER START -->
+        <div class="logo">
+            <a href="{{path_for('home')}}"></a>
+        </div>
+        <div class="social">
+            <a target="_blank" href="https://www.facebook.com/evertjan.bosman">
+                <img src="{{ base_url() }}/assets/images/social/facebook.png" alt="facebook" />
+            </a>
+            <a target="_blank" href="https://twitter.com/evert_jan">
+                <img src="{{ base_url() }}/assets/images/social/twitter.png" alt="twitter" />
+            </a>
+            <a target="_blank" href="https://nl.linkedin.com/in/ejbosman">
+                <img src="{{ base_url() }}/assets/images/social/linkedin.png" alt="linkedin" />
+            </a>
+        </div>
+        <div class="menuContainer">
+            <ul class="menu font1">
+                <li>
+                    <a href="{{path_for('home')}}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ path_for('cv') }}">Curriculum Vitae</a>
+                </li>
+                <li>
+                    <a href="{{ path_for('blog') }}">Blog</a>
+                </li>
+            </ul>
+            
+        </div>
+    </div><!-- HEADER END -->
+</div>

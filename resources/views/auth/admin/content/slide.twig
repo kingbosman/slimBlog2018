@@ -1,0 +1,54 @@
+{% extends 'templates/admin.twig' %}
+
+{% block content %}
+
+	<div class="container">
+
+        <div class="card">
+
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2>Manage slide <small>To edit a slide please fill out the form below.</small></h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <form role="form" action="/admin/content/slide/delete/{{ slide.slide_id }}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm m-t-10 pull-right"><i class="zmdi zmdi-delete"></i> Delete slide</button>
+                            {{ csrf.field | raw }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body card-padding">
+                <form role="form" method="post" action="/admin/content/slide/update/{{ slide.slide_id }}">
+                    <div class="form-group fg-line {{ errors.intro ? 'has-error' : '' }}">
+                        <label for="intro">Intro</label>
+                        <input type="text" name="intro" class="form-control input-sm" placeholder="Title" value="{{ slide.slide_intro }}">
+                        {% if errors.intro %}
+                            <span class="help-block">{{ errors.intro | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group fg-line {{ errors.slide_content ? 'has-error' : '' }}">
+                        <label for="slide_content">Content</label>
+                        <input type="text" name="slide_content" class="form-control input-sm" placeholder="Small message max 255 characters" value="{{ slide.slide_content }}">
+                        {% if errors.slide_content %}
+                            <span class="help-block">{{ errors.slide_content | first }}</span>
+                        {% endif %}
+                    </div>
+                    <img src="{{ slide.slide_image }}" alt="">
+                    <div class="form-group">
+                        <label for="file">Image</label><br>
+                        <input data-crop="" type="hidden" value="{{ slide.slide_image }}" name="image" id="file" role="uploadcare-uploader" />
+                    </div>
+
+                    {{ csrf.field | raw }}
+
+                    
+                    <button type="submit" class="btn btn-primary btn-sm m-t-10">Edit slide</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
